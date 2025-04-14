@@ -9,8 +9,8 @@ export class CotacaoDolarService {
 
   constructor(private http: HttpClient) {}
 
-  public getCotacaoAtual(): Observable<number> {
-    return this.http.get<any>(`${this.apiServerUrl}/moeda/atual`);
+  public getCotacaoAtual(): Observable<Cotacao> {
+    return this.http.get<Cotacao>(`${this.apiServerUrl}/moeda/atual`);
   }
 
   public getCotacaoPorPeriodoFront(
@@ -18,5 +18,12 @@ export class CotacaoDolarService {
     dataFinal: string
   ): Observable<Cotacao[]> {
     return this.http.get<Cotacao[]>(`${this.apiServerUrl}/moeda/${dataInicial}&${dataFinal}`);
+  }
+
+  public getCotacaoMenoresAtualFront(
+    dataInicial: string,
+    dataFinal: string
+  ): Observable<Cotacao[]> {
+    return this.http.get<Cotacao[]>(`${this.apiServerUrl}/moeda/menor-atual/${dataInicial}&${dataFinal}`);
   }
 }
